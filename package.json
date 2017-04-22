@@ -1,0 +1,5 @@
+{
+  "name": "binarywriter-node",
+  "description": ".NET like binarywriter in nodejs",
+  "version": "0.1"
+}
