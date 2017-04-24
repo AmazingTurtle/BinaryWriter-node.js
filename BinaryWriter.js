@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 /*
  * Simple BinaryWriter is a minimal tool to write binary stream with unpredictable size.
  * Useful for binary serialization.
@@ -40,19 +40,31 @@ BinaryWriter.prototype.writeInt8 = function (value) {
     this._buffer[this._length++] = value;
 };
 
-BinaryWriter.prototype.writeUInt16 = function (value) {
+BinaryWriter.prototype.writeUInt16BE = function (value) {
+    checkAlloc(this, 2);
+    this._buffer[this._length++] = value >> 8;
+    this._buffer[this._length++] = value;
+};
+
+BinaryWriter.prototype.writeUInt16LE = function (value) {
     checkAlloc(this, 2);
     this._buffer[this._length++] = value;
     this._buffer[this._length++] = value >> 8;
 };
 
-BinaryWriter.prototype.writeInt16 = function (value) {
+BinaryWriter.prototype.writeInt16BE = function (value) {
+    checkAlloc(this, 2);
+    this._buffer[this._length++] = value >> 8;
+    this._buffer[this._length++] = value;
+};
+
+BinaryWriter.prototype.writeInt16LE = function (value) {
     checkAlloc(this, 2);
     this._buffer[this._length++] = value;
     this._buffer[this._length++] = value >> 8;
 };
 
-BinaryWriter.prototype.writeUInt32 = function (value) {
+BinaryWriter.prototype.writeUInt32BE = function (value) {
     checkAlloc(this, 4);
     this._buffer[this._length++] = value;
     this._buffer[this._length++] = value >> 8;
@@ -60,7 +72,23 @@ BinaryWriter.prototype.writeUInt32 = function (value) {
     this._buffer[this._length++] = value >> 24;
 };
 
-BinaryWriter.prototype.writeInt32 = function (value) {
+BinaryWriter.prototype.writeUInt32LE = function (value) {
+    checkAlloc(this, 4);
+    this._buffer[this._length++] = value >> 24;
+    this._buffer[this._length++] = value >> 16;
+    this._buffer[this._length++] = value >> 8;
+    this._buffer[this._length++] = value;
+};
+
+BinaryWriter.prototype.writeInt32BE = function (value) {
+    checkAlloc(this, 4);
+    this._buffer[this._length++] = value >> 24;
+    this._buffer[this._length++] = value >> 16;
+    this._buffer[this._length++] = value >> 8;
+    this._buffer[this._length++] = value;
+};
+
+BinaryWriter.prototype.writeInt32LE = function (value) {
     checkAlloc(this, 4);
     this._buffer[this._length++] = value;
     this._buffer[this._length++] = value >> 8;
@@ -68,13 +96,25 @@ BinaryWriter.prototype.writeInt32 = function (value) {
     this._buffer[this._length++] = value >> 24;
 };
 
-BinaryWriter.prototype.writeFloat = function (value) {
+BinaryWriter.prototype.writeFloatBE = function (value) {
+    checkAlloc(this, 4);
+    this._buffer.writeFloatBE(value, this._length, true);
+    this._length += 4;
+};
+
+BinaryWriter.prototype.writeFloatLE = function (value) {
     checkAlloc(this, 4);
     this._buffer.writeFloatLE(value, this._length, true);
     this._length += 4;
 };
 
-BinaryWriter.prototype.writeDouble = function (value) {
+BinaryWriter.prototype.writeDoubleBE = function (value) {
+    checkAlloc(this, 8);
+    this._buffer.writeDoubleBE(value, this._length, true);
+    this._length += 8;
+};
+
+BinaryWriter.prototype.writeDoubleLE = function (value) {
     checkAlloc(this, 8);
     this._buffer.writeDoubleLE(value, this._length, true);
     this._length += 8;
