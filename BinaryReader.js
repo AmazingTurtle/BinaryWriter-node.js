@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 /*
  * Simple BinaryReader is a minimal tool to read binary stream.
  * Useful for binary deserialization.
@@ -37,38 +37,74 @@ BinaryReader.prototype.readInt8 = function () {
     return value;
 };
 
-BinaryReader.prototype.readUInt16 = function () {
+BinaryReader.prototype.readUInt16LE = function () {
     var value = this._buffer.readUInt16LE(this._offset);
     this._offset += 2;
     return value;
 };
 
-BinaryReader.prototype.readInt16 = function () {
+BinaryReader.prototype.readUInt16BE = function () {
+    var value = this._buffer.readUInt16BE(this._offset);
+    this._offset += 2;
+    return value;
+};
+
+BinaryReader.prototype.readInt16LE = function () {
     var value = this._buffer.readInt16LE(this._offset);
     this._offset += 2;
     return value;
 };
 
-BinaryReader.prototype.readUInt32 = function () {
+BinaryReader.prototype.readInt16BE = function () {
+    var value = this._buffer.readInt16BE(this._offset);
+    this._offset += 2;
+    return value;
+};
+
+BinaryReader.prototype.readUInt32LE = function () {
     var value = this._buffer.readUInt32LE(this._offset);
     this._offset += 4;
     return value;
 };
 
-BinaryReader.prototype.readInt32 = function () {
+BinaryReader.prototype.readUInt32BE = function () {
+    var value = this._buffer.readUInt32BE(this._offset);
+    this._offset += 4;
+    return value;
+};
+
+BinaryReader.prototype.readInt32LE = function () {
     var value = this._buffer.readInt32LE(this._offset);
     this._offset += 4;
     return value;
 };
 
-BinaryReader.prototype.readFloat = function () {
+BinaryReader.prototype.readInt32BE = function () {
+    var value = this._buffer.readInt32LE(this._offset);
+    this._offset += 4;
+    return value;
+};
+
+BinaryReader.prototype.readFloatLE = function () {
     var value = this._buffer.readFloatLE(this._offset);
     this._offset += 4;
     return value;
 };
 
-BinaryReader.prototype.readDouble = function () {
+BinaryReader.prototype.readFloatBE = function () {
+    var value = this._buffer.readFloatBE(this._offset);
+    this._offset += 4;
+    return value;
+};
+
+BinaryReader.prototype.readDoubleLE = function () {
     var value = this._buffer.readDoubleLE(this._offset);
+    this._offset += 8;
+    return value;
+};
+
+BinaryReader.prototype.readDoubleBE = function () {
+    var value = this._buffer.readDoubleBE(this._offset);
     this._offset += 8;
     return value;
 };
